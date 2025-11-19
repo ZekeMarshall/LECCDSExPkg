@@ -1,0 +1,25 @@
+Package: LECCDSExPkg
+Title: Lancaster Environment Centre - Centre of Excellence in Environmental Data Science Example Package
+Version: 0.1.0
+Authors@R: c(person(given = "Zeke",
+                    family = "Marshall",
+                    role = c("aut", "cre"),
+                    email = "zekmar@ceh.ac.uk",
+                    comment = c(ORCID = "0000-0001-9260-7827"))
+                    )
+Description: Provides an example basic package structure for the LEC-CEEDS coding and stats group.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Depends: 
+    R (>= 3.5)
+LazyData: true
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Imports: 
+    checkmate (>= 2.3.3)
+VignetteBuilder: knitr

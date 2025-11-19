@@ -1,3 +1,6 @@
-# LECCDSExPkg (development version)
+# LECCDSExPkg (2025-11-19)
 
-* Initial CRAN submission.
+Intial release.
+
+* Adding functions `LECCDSExPkg::hamming_distance` and `LECCDSExPkg::bin_mat`.
+* Adding vignette "Hamming Distance".

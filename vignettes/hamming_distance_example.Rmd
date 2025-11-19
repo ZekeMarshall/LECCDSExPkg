@@ -1,0 +1,36 @@
+---
+title: "Hamming Distance"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{k-means clustering using a hamming distance matrix}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(LECCDSExPkg)
+```
+
+# Introduction
+
+The Hamming distance
+
+# Demonstration
+
+As the Hamming distance matches involves a decision on how to represent continous data, e.g. 
+
+```{r hamming_dist}
+
+```
+
+# References
+
+Hamming, R.W., 1950. Error Detecting and Error Correcting Codes. Bell System Technical Journal 29, 147–160. https://doi.org/10.1002/j.1538-7305.1950.tb00463.x
+

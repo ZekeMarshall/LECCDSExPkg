@@ -1,0 +1,50 @@
+Create directories:
+- R
+- data
+- data-raw
+- inst/extdata
+- inst/testdata
+
+If you didn't initialise the repository with a .gitignore file, run `usethis::use_git_ignore()`
+
+Create files
+
+- data-raw/
+- data-raw/
+- R/data.R
+
+We use renv to record the packages which are used during the development of a package and in the creation of vignettes.
+The packages recorded by renv will include the development package's dependencies and ...
+
+install.packages("renv")
+renv::init()
+
+renv::install(c("usethis", "rmarkdown", "testthat", "devtools", "pkgdown", "covr", "assertthat", "checkmate"))
+
+usethis::use_blank_slate()
+usethis::use_readme_rmd()
+usethis::use_description()
+usethis::use_coverage()
+usethis::use_namespace()
+usethis::use_news_md()
+usethis::use_mit_license()
+
+usethis::use_github_action("test-coverage")
+usethis::use_github_action("check-standard")
+
+Create a function e.g. hamming_distance
+Run usethis::use_test(), which automatically creates a test for the file you have in the viewer e.g. ./R/hamming_distance.R
+This automatically sets up the tests directory and testthat infrastructure.
+
+Create vignettes demonstrating how to use the package functionality
+`usethis::use_vignette(name = "hamming_distance_example", title = "Hamming Distance")`.
+
+renv::snapshot()
+
+Check dependencies with `renv::dependencies()$Package |> unique() |> sort()`
+Ensure these dependencies with the exception of packages that are a part of base and utility packages, e.g.:
+base, devtools, grid (part of base), grDevices (part of base), knitr, pkgdown, renv, rmarkdown, testthat, and usethis.
+These packages can be retrieved by setting the 'path' argument of `renv::dependencies` to the directories 
+containing code exported in the package renv::dependencies(path = "./R")).
+Ensure the minimum version of the required packages are recorded, to achieve this you can run the following code
+`usethis::use_package("checkmate", min_version = "2.3.3")`.
