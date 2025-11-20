@@ -18,16 +18,18 @@ knitr::opts_chunk$set(
 library(LECCDSExPkg)
 ```
 
-# Introduction
-
-The Hamming distance
-
 # Demonstration
 
-As the Hamming distance matches involves a decision on how to represent continous data, e.g. 
+This vignette demonstrates how to use the `LECCDSExPkg` to calculate the Hamming distance (Hamming, 1950) for all pairwise combinations of columns in a matrix containing continuous data.
+
+```{r bin_mat}
+mat <- LECCDSExPkg::test_mat
+
+binned_mat <- LECCDSExPkg::bin_mat(X = mat, breaks = LECCDSExPkg::break_options[["50_inc"]])
+```
 
 ```{r hamming_dist}
-
+hd_mat <- LECCDSExPkg::hamming_distance(X = mat)
 ```
 
 # References

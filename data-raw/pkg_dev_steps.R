@@ -1,9 +1,3 @@
-# Adhere roughly to the following strategies:
-# - Package development - https://rstudio.github.io/cheatsheets/html/package-development.html
-# - Version control - https://github.com/MatthewHeun/DevelopmentStrategies
-# - Documentation - https://roxygen2.r-lib.org/index.html
-
-
 # 1) Create constants
 source("./data-raw/create_external_constants.R")
 source("./data-raw/create_internal_constants.R")
@@ -21,6 +15,8 @@ covr::codecov()
 
 # 6) check the package
 devtools::check(document = FALSE)
+
+# It is recommended that you do not proceed if all checks do not pass!
 
 # 7) build package
 devtools::build(vignettes = FALSE)

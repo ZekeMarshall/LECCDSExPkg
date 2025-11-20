@@ -1,50 +1,96 @@
-Create directories:
-- R
-- data
-- data-raw
-- inst/extdata
-- inst/testdata
+# Adhere roughly to the following strategies:
+# - Package development - https://rstudio.github.io/cheatsheets/html/package-development.html
+# - Version control - https://github.com/MatthewHeun/DevelopmentStrategies
+# - Documentation - https://roxygen2.r-lib.org/index.html
 
-If you didn't initialise the repository with a .gitignore file, run `usethis::use_git_ignore()`
+1) Create repository, either:
+1a) Locally, using the new project functionality in an IDE such as RStudio or usethis::create_package()
+1b) On Github (recommended), then pull locally.
 
-Create files
+2) Open the project in an IDE of your choice (I reccomend RStudio for package development, but VSCode is also excellent)
 
-- data-raw/
-- data-raw/
-- R/data.R
+3) Create the following directories:
+- ./R
+- ./data
+- ./data-raw
+- ./inst/extdata
+- ./inst/testdata
 
-We use renv to record the packages which are used during the development of a package and in the creation of vignettes.
-The packages recorded by renv will include the development package's dependencies and ...
+4) Optionally, if you didn't initialise the repository with a .gitignore file, run `usethis::use_git_ignore()`
 
-install.packages("renv")
-renv::init()
+5) Create files
+- ./data-raw/create_external_constants.R
+- ./data-raw/create_internal_constants.R
+- ./R/data.R
 
-renv::install(c("usethis", "rmarkdown", "testthat", "devtools", "pkgdown", "covr", "assertthat", "checkmate"))
+6) Optionally, but highly recommended, set up the repository with renv. 
+   renv is used to record the packages used in the project, ensuring the all processes are fully reproducible.
+6a) Run install.packages("renv")
+6c) Run renv::init()
 
-usethis::use_blank_slate()
-usethis::use_readme_rmd()
-usethis::use_description()
-usethis::use_coverage()
-usethis::use_namespace()
-usethis::use_news_md()
-usethis::use_mit_license()
+7) Install package development utility packages with either:
+7a) renv::install(c("usethis", "rmarkdown", "testthat", "devtools", "pkgdown", "covr", "checkmate"))
+    or
+7b) install.packages(c("usethis", "rmarkdown", "testthat", "devtools", "pkgdown", "covr", "checkmate"))
 
-usethis::use_github_action("test-coverage")
-usethis::use_github_action("check-standard")
 
-Create a function e.g. hamming_distance
-Run usethis::use_test(), which automatically creates a test for the file you have in the viewer e.g. ./R/hamming_distance.R
-This automatically sets up the tests directory and testthat infrastructure.
+8) Use the usethis package to setup package infrastructure:
+- usethis::use_blank_slate()
+- usethis::use_readme_rmd()
+- usethis::use_description()
+- usethis::use_coverage() (optional, depending on whether you want to use a service such as codecov.io)
+- usethis::use_namespace()
+- usethis::use_news_md()
+- usethis::use_mit_license() (or an alternative licence)
+- usethis::use_testthat()
 
-Create vignettes demonstrating how to use the package functionality
-`usethis::use_vignette(name = "hamming_distance_example", title = "Hamming Distance")`.
+9) Set up basic CI/CD if using Github
+9a) usethis::use_github_action("check-standard")
+9b) usethis::use_github_action("test-coverage") (optional, depending on whether you want to use a service such as codecov.io)
 
-renv::snapshot()
+10) Begin package development:
+10a) Create a function in a R file in the ./R directory (e.g. ./R/hamming_distance/R)
+10b) Optionally, add external files to the ./inst/extdata directory, which can be used to produce R objects to bundle in the package.
+10c) Optionally, use the aforementioned external files to create objects to bundle into the package (see ./data-raw/create_external_constants.R)
 
-Check dependencies with `renv::dependencies()$Package |> unique() |> sort()`
-Ensure these dependencies with the exception of packages that are a part of base and utility packages, e.g.:
-base, devtools, grid (part of base), grDevices (part of base), knitr, pkgdown, renv, rmarkdown, testthat, and usethis.
-These packages can be retrieved by setting the 'path' argument of `renv::dependencies` to the directories 
-containing code exported in the package renv::dependencies(path = "./R")).
-Ensure the minimum version of the required packages are recorded, to achieve this you can run the following code
-`usethis::use_package("checkmate", min_version = "2.3.3")`.
+11) Continue package development by:
+11a) Adding functions and data objects/constants.
+11b) Create vignettes demonstrating how to use the package functionality,
+     for example run `usethis::use_vignette(name = "hamming_distance_example", title = "Hamming Distance")`.
+
+12) Ensure all functions are documented where they are defined and objects are documented in the ./R/data.R file using roxygen2 
+    You can use the RStudio Code->Insert Roxygen Skeleton to attach a template to a function when editing the function.
+
+13) During development run renv::snapshot() to keep the register of package dependencies (recorded in the renv.lock)
+    file up to date.
+    
+14) Ensure all package dependencies are recorded in the DESCRIPTION file.
+    Check dependencies with `renv::dependencies()$Package |> unique() |> sort()`
+    Ensure these dependencies with the exception of packages that are a part of base and utility packages, e.g.:
+    base, devtools, grid (part of base), grDevices (part of base), knitr, pkgdown, renv, rmarkdown, testthat, and usethis.
+    These packages can be retrieved by setting the 'path' argument of `renv::dependencies` to the directories 
+    containing code exported in the package renv::dependencies(path = "./R")).
+    Ensure the minimum version of the required packages are recorded, to achieve this you can run the following code
+    `usethis::use_package("checkmate", min_version = "2.3.3")`.
+    
+15) Ensure all functions are tested, ideally with all argument permutations and multiple use cases.
+    To do this 10b) run usethis::use_test(), 
+    which automatically creates a test for the file you have in the viewer e.g. ./R/hamming_distance.R
+    --> /tests/testthat/test-hamming_distance.R.
+
+16) Build steps
+16a) Ensure the version code (e.g. 0.1.0) is recorded in the latest NEWS.md release, the DESCRIPTION file, any badges in the README, and in any pkgdown documentation.
+16b) Follow the steps in the ./data-raw/pkg_dev_steps.R file.
+
+17) Release steps
+    Once confident that the initial or a new version of your package is ready for release,
+    and if using github and/or git.
+17a) Add, commit, and push your changes to the working branch (may be main, develop, or an additional 'child' branch);
+     if this branch is not the main branch merge this branch into main.
+17b) Go to github:
+- Click on the releases tab on the right
+- Copy the latest NEWS.md entry into the release notes
+- Enter the version number in tag and version
+- Click release
+17c) Zenodo - TO ADD
+17d) CRAN - TO ADD
