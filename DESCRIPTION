@@ -1,6 +1,6 @@
 Package: LECCDSExPkg
 Title: Lancaster Environment Centre - Centre of Excellence in Environmental Data Science Example Package
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: c(person(given = "Zeke",
                     family = "Marshall",
                     role = c("aut", "cre"),

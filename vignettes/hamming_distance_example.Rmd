@@ -2,7 +2,7 @@
 title: "Hamming Distance"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{k-means clustering using a hamming distance matrix}
+  %\VignetteIndexEntry{Hamming Distance}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

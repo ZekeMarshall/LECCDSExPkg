@@ -5,7 +5,7 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/ZekeMarshall/LECCDSExPkg/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ZekeMarshall/LECCDSExPkg/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/ZekeMarshall/LECCDSExPkg/actions/workflows/R-CMD-check/badge.svg)](https://github.com/ZekeMarshall/LECCDSExPkg/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 …
